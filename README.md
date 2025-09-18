@@ -90,10 +90,10 @@ Purpose: Ensures that the C identifiers in the .gir file match the expected nami
 
 What it is: The prefix of the actual C symbols in your compiled library (.so file).
 Example: If your compiled symbols in .so file look like this:
-
+```
 hello_hello_world_say_hello
 hello_hello_world_get_type
-
+```
 Then use:
 --symbol-prefix=hello_hello_world
 
@@ -103,12 +103,12 @@ Purpose: Tells g-ir-scanner how to find your symbols in the .so file. This prefi
 ## Q: inspect the generated .so file by meson.build:
 
 > nm -gC ./libhello-lib.so | grep hello
-
+```
 00000000000011d2 T hello_hello_world_construct
 0000000000001283 T hello_hello_world_get_type
 0000000000001206 T hello_hello_world_new
 0000000000001189 T hello_hello_world_say_hello
-
+```
 
 method say_hello is present
 
