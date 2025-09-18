@@ -167,7 +167,7 @@ If you want to install the .typelib file system-wide (e.g., to /usr/lib/gireposi
 > sudo cp Hello-1.0.typelib /usr/lib/girepository-1.0/
 
 
-# Q: in .vala class method is say_hello, class name is HelloWorld and namespace is Hello. where does hello_hello_world_say_hello all lowercase came from?9:22pm
+## Q: in .vala class method is say_hello, class name is HelloWorld and namespace is Hello. where does hello_hello_world_say_hello all lowercase came from?9:22pm
 
 Ans : The lowercase symbol name hello_hello_world_say_hello in your compiled binary (.so file) is generated automatically by the Vala compiler based on your Vala code. Here's how and why this happens:
 
@@ -187,7 +187,7 @@ The Vala compiler automatically generates C code and symbols following a specifi
 2. How the Symbol Name is Constructed
 The symbol name hello_hello_world_say_hello is constructed as follows:
 
-
+```
 Namespace (Hello):
 
 Converted to lowercase: hello_
@@ -208,7 +208,7 @@ Appended as-is (already lowercase): say_hello
 
 Combining these, you get:
 hello_hello_world_say_hello
-
+```
 3. Why Lowercase?
 
 C Compatibility: C is case-sensitive, and using lowercase for symbols is a common convention to avoid conflicts and improve readability.
@@ -240,6 +240,12 @@ When you run g-ir-scanner, you need to specify the --symbol-prefix to match the 
 This tells g-ir-scanner to look for symbols starting with hello_hello_world in your .so file.
 
 6. Summary Table
-NamespaceHellohello_Class NameHelloWorldhello_world_Method Namesay_hellosay_helloCombined Symbolhello_hello_world_say_hello
+   ```
+   Vala Code Element | Example     |   Generated C Symbol Prefix
+      Namespace      |   Hello     |       hello_
+    Class Name       |  HelloWorld |      hello_world_
+    Method Name      | say_hello   |      say_hello
+   Combined Symbol   |             |   hello_hello_world_say_hello
+```
 
 This makes the .typelib file available for language bindings to use.
