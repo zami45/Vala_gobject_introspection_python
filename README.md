@@ -1,3 +1,6 @@
+How to generate .typelib so that other programming languages (python,js) can consume GObject introspectable .vala code
+---
+
 # generate .so shared object file using meson.build
 
 ## in meson.build file :
