@@ -166,4 +166,80 @@ Run the following command to generate the .typelib file:
 If you want to install the .typelib file system-wide (e.g., to /usr/lib/girepository-1.0/), use:
 > sudo cp Hello-1.0.typelib /usr/lib/girepository-1.0/
 
+
+#Q: in .vala class method is say_hello, class name is HelloWorld and namespace is Hello. where does hello_hello_world_say_hello all lowercase came from?9:22pm
+
+Ans : The lowercase symbol name hello_hello_world_say_hello in your compiled binary (.so file) is generated automatically by the Vala compiler based on your Vala code. Here's how and why this happens:
+
+1. Vala Naming Conventions
+When you define a class and method in Vala like this:
+```
+namespace Hello {
+    public class HelloWorld : Object {
+        public void say_hello() {
+            print("Hello, world from Vala!\n");
+        }
+    }
+}
+```
+The Vala compiler automatically generates C code and symbols following a specific naming convention.
+
+2. How the Symbol Name is Constructed
+The symbol name hello_hello_world_say_hello is constructed as follows:
+
+
+Namespace (Hello):
+
+Converted to lowercase: hello_
+
+
+
+Class Name (HelloWorld):
+
+Converted to lowercase and underscores: hello_world_
+
+
+
+Method Name (say_hello):
+
+Appended as-is (already lowercase): say_hello
+
+
+
+Combining these, you get:
+hello_hello_world_say_hello
+
+3. Why Lowercase?
+
+C Compatibility: C is case-sensitive, and using lowercase for symbols is a common convention to avoid conflicts and improve readability.
+Consistency: The Vala compiler uses a consistent naming scheme for all generated symbols.
+GObject Conventions: GObject-based libraries often use lowercase and underscores for function names.
+
+
+4. Example Breakdown
+For your Vala code:
+```
+namespace Hello {
+    public class HelloWorld : Object {
+        public void say_hello() { ... }
+    }
+}
+```
+
+The Vala compiler generates the following C function:
+> void hello_hello_world_say_hello(HelloHelloWorld* self);
+```
+hello_: Prefix for the namespace Hello.
+hello_world_: Prefix for the class HelloWorld.
+say_hello: The method name.
+```
+
+5. Why This Matters for Introspection
+When you run g-ir-scanner, you need to specify the --symbol-prefix to match the prefix of these generated symbols. In your case:
+> --symbol-prefix=hello_hello_world
+This tells g-ir-scanner to look for symbols starting with hello_hello_world in your .so file.
+
+6. Summary Table
+NamespaceHellohello_Class NameHelloWorldhello_world_Method Namesay_hellosay_helloCombined Symbolhello_hello_world_say_hello
+
 This makes the .typelib file available for language bindings to use.
