@@ -64,9 +64,11 @@ Here’s a clear breakdown of what --namespace, --identifier-prefix, and --symbo
 What it is: The namespace of your library as it will appear in the .gir file and in language bindings (e.g., Python, JavaScript).
 Example: If your Vala code is in the Hello namespace:
 
+```
 namespace Hello {
     public class HelloWorld : Object { ... }
 }
+```
 
 Then use:
 --namespace=Hello
