@@ -167,7 +167,7 @@ If you want to install the .typelib file system-wide (e.g., to /usr/lib/gireposi
 > sudo cp Hello-1.0.typelib /usr/lib/girepository-1.0/
 
 
-#Q: in .vala class method is say_hello, class name is HelloWorld and namespace is Hello. where does hello_hello_world_say_hello all lowercase came from?9:22pm
+# Q: in .vala class method is say_hello, class name is HelloWorld and namespace is Hello. where does hello_hello_world_say_hello all lowercase came from?9:22pm
 
 Ans : The lowercase symbol name hello_hello_world_say_hello in your compiled binary (.so file) is generated automatically by the Vala compiler based on your Vala code. Here's how and why this happens:
 
